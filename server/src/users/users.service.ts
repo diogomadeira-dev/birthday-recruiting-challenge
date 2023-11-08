@@ -1,36 +1,24 @@
-import { Injectable } from "@nestjs/common";
-import { v4 as uuidv4 } from 'uuid';
-import { UpdateUserDto } from "./dto/update-user.dto";
+import { Injectable } from '@nestjs/common';
 
-import { User } from "./schemas/user.schema";
-import { UsersRepository } from "./users.repository";
+// This should be a real class/interface representing a user entity
+export type User = any;
 
 @Injectable()
 export class UsersService {
-    constructor(private readonly usersRepository: UsersRepository) {}
+  private readonly users = [
+    {
+      userId: 1,
+      username: 'user',
+      password: 'mosano', // ! password hard coded only for the recruiting challenge
+    },
+    {
+      userId: 2,
+      username: 'user2',
+      password: 'mosano', // ! password hard coded only for the recruiting challenge
+    },
+  ];
 
-    async getUserById(userId: string): Promise<User> {
-        return this.usersRepository.findOne({ userId })
-    }
-
-    async getUsers(): Promise<User[]> {
-        return this.usersRepository.find({});
-    }
-
-    async createUser(name: string, surname: string, birthday: Date): Promise<User> {
-        return this.usersRepository.create({
-            userId: uuidv4(),
-            name,
-            surname,
-            birthday,
-        })
-    }
-
-    async updateUser(userId: string, userUpdates: UpdateUserDto): Promise<User> {
-        return this.usersRepository.findOneAndUpdate({ userId }, userUpdates);
-    }
-
-    async deleteUser(userId: string): Promise<User> {
-        return this.usersRepository.delete({ userId });
-    }
+  async findOne(username: string): Promise<User | undefined> {
+    return this.users.find(user => user.username === username);
+  }
 }
