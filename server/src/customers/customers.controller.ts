@@ -6,7 +6,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CustomersService } from './customers.service';
 import { Customer } from './schemas/customer.schema';
 
-@Controller('customers')
+@Controller('api/customers')
 export class CustomersController {
   constructor(private readonly customersService: CustomersService) {}
 
