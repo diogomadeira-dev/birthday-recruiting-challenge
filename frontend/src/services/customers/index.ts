@@ -7,5 +7,5 @@ export const customersApi = {
   createCustomer: async (data: any) =>
     await post<ApiResponseType>('/api/customers', data),
   deleteCustomer: async (id: string) =>
-    await destroy<ApiResponseType>('/api/customers', id),
+    await destroy<ApiResponseType>(`/api/customers/${id}`),
 };

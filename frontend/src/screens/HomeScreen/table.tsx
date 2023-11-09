@@ -46,7 +46,7 @@ export const HomeTable = ({customers}: any) => {
                     <Button variant="outline" size="icon">
                       <Pencil className="h-4 w-4" />
                     </Button>
-                    <Button variant="destructive" size="icon" onClick={() => deleteCustomerFromTable(customer?.customerId)}>
+                    <Button type="button" variant="destructive" size="icon" onClick={() => deleteCustomerFromTable(customer?.customerId)}>
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>

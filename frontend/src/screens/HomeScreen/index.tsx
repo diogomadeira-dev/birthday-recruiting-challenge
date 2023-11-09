@@ -1,20 +1,10 @@
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { cn } from "@/lib/utils"
 import { getCountries } from "@/redux/slices/countriesSlice"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { z } from "zod"
-import Spinner from "../../components/Spinner"
 import { useAppDispatch } from "../../redux/hooks"
 import { createCustomer, getCustomers } from "../../redux/slices/customersSlice"
 import { HomeTable } from "./table"
@@ -65,7 +55,7 @@ const HomeScreen = () => {
       <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-10">Diogo Madeira - Recruiting Challenge Mosano</h1>
       <div className="flex gap-10 w-full">
         <div className="flex justify-center flex-col">
-          <Form {...form}>
+          {/* <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               {userInfo ? (
                 <>
@@ -182,7 +172,7 @@ const HomeScreen = () => {
                   </>
                 )}
             </form>
-          </Form>
+          </Form> */}
         </div>
         <div className="flex-1 border border-blue-500">
           <HomeTable customers={customers} />
