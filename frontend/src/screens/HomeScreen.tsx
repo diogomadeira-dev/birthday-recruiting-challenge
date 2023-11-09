@@ -11,6 +11,7 @@ import moment from "moment"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { z } from "zod"
 import Spinner from "../components/Spinner"
 import { useAppDispatch } from "../redux/hooks"
@@ -32,8 +33,10 @@ const FormSchema = z.object({
 const HomeScreen = () => {
 
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
-  const { customers } = useSelector((state) => state.customers)
+
+  const { customers, error } = useSelector((state) => state.customers)
 
   const loading = false
 
@@ -46,17 +49,9 @@ const HomeScreen = () => {
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // })
     console.log('data', data)
 
-    dispatch(createCustomer(data))
+    dispatch(createCustomer(data)).then(() => dispatch(getCustomers()))
   }
 
     return (
@@ -139,7 +134,14 @@ const HomeScreen = () => {
                     )}
                   />
                   </div>
-                <button type="submit" disabled={loading} className="flex justify-center text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{loading ? <Spinner /> : 'Save'}</button>
+                <button type="submit" disabled={loading} className="flex mb-2 justify-center text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{loading ? <Spinner /> : 'Save'}</button>
+                {error && 
+                (
+                  <>
+                      <FormMessage>Authentication Error. Try to login again.</FormMessage>
+                      <Button onClick={() => navigate("/login")}>Go to Login</Button>
+                  </>
+              )}
               </div>
               <div className="flex-1 border border-blue-500">
               <table className="table-auto w-full">
@@ -170,7 +172,6 @@ const HomeScreen = () => {
               </table>
               </div>
             </div>
-
           </div>
         </form>
       </Form>

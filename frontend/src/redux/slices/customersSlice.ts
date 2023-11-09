@@ -5,6 +5,7 @@ import { customersApi } from '../../services/customers';
 const initialState = {
   loading: false,
   customers: [],
+  error: false
 }
 
 const getCustomers = createAsyncThunk('customers/get', async () => {
@@ -33,6 +34,9 @@ const customersSlice = createSlice({
   name: 'customers',
   initialState,
   reducers: {
+    disableErrorState: (state) => {
+      state.error = false
+    },
   },
   extraReducers: (builder) => {
     // Get customers
@@ -49,17 +53,20 @@ const customersSlice = createSlice({
     // create customer
     builder.addCase(createCustomer.pending, (state, _) => {
       state.loading = true
+      state.error = false
     });
     builder.addCase(createCustomer.fulfilled, (state, _) => {
       state.loading = false
+      state.error = false
     });
     builder.addCase(createCustomer.rejected, (state, _) => {
       state.loading = false
+      state.error = true
     });
   },
 })
 
 export { createCustomer, getCustomers };
 // eslint-disable-next-line no-empty-pattern
-export const {} = customersSlice.actions;
+export const { disableErrorState } = customersSlice.actions;
 export default customersSlice.reducer;

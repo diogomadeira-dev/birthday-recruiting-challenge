@@ -1,3 +1,4 @@
+import { disableErrorState } from '@/redux/slices/customersSlice'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -22,8 +23,9 @@ const LoginScreen = () => {
     try {
       dispatch(getUser(data))
       navigate('/')
+      disableErrorState()
     } catch (error) {
-      
+      console.log(error)
     }
   }
 
