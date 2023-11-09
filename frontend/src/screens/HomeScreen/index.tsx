@@ -105,7 +105,7 @@ const HomeScreen = () => {
                       name="country"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Email</FormLabel>
+                          <FormLabel>Country</FormLabel>
                           <Select onValueChange={field.onChange}>
                             <FormControl>
                               <SelectTrigger>
