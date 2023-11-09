@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { useAppDispatch } from "@/redux/hooks"
 import { deleteCustomer, getCustomers } from "@/redux/slices/customersSlice"
-import { Pencil, Trash2 } from "lucide-react"
+import { Trash2 } from "lucide-react"
 import moment from "moment"
 
 export const HomeTable = ({customers}: any) => {
@@ -43,9 +43,6 @@ export const HomeTable = ({customers}: any) => {
                 </td>
                 <td className="border border-slate-300h-10">
                   <div className="space-x-2">
-                    <Button variant="outline" size="icon">
-                      <Pencil className="h-4 w-4" />
-                    </Button>
                     <Button type="button" variant="destructive" size="icon" onClick={() => deleteCustomerFromTable(customer?.customerId)}>
                       <Trash2 className="h-4 w-4" />
                     </Button>
