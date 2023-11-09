@@ -24,6 +24,17 @@ const createCustomer = createAsyncThunk('customers/post', async (data) => {
 
     return response;
   } catch (error) {
+    console.log('error', error)
+    throw new Error();
+  }
+});
+
+const deleteCustomer = createAsyncThunk('customers/delete', async (id) => {
+  try { 
+    const response = await customersApi.deleteCustomer(id);
+
+    return response;
+  } catch (error) {
     throw new Error();
   }
 });
@@ -61,10 +72,23 @@ const customersSlice = createSlice({
       state.loading = false
       state.error = true
     });
+    // delete customer
+    builder.addCase(deleteCustomer.pending, (state) => {
+      state.loading = true
+      state.error = false
+    });
+    builder.addCase(deleteCustomer.fulfilled, (state) => {
+      state.loading = false
+      state.error = false
+    });
+    builder.addCase(deleteCustomer.rejected, (state) => {
+      state.loading = false
+      state.error = true
+    });
   },
 })
 
-export { createCustomer, getCustomers };
+export { createCustomer, deleteCustomer, getCustomers };
 // eslint-disable-next-line no-empty-pattern
 export const { disableErrorState } = customersSlice.actions;
 export default customersSlice.reducer;

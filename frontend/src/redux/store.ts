@@ -8,6 +8,7 @@ import storage from 'redux-persist/lib/storage';
 
 // slices
 import authReducer from './../redux/slices/authSlice';
+import countriesSlice from './slices/countriesSlice';
 import customersSlice from './slices/customersSlice';
 
 const persistConfig = {
@@ -19,7 +20,8 @@ const persistConfig = {
 
 const reducers = combineReducers({ 
   auth: authReducer, 
-  customers: customersSlice 
+  customers: customersSlice,
+  countries: countriesSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);

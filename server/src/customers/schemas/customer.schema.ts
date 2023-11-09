@@ -14,8 +14,8 @@ export class Customer {
   @Prop()
   surname: string;
 
-//   @Prop()
-//   Country: string;
+  @Prop()
+  country: string;
 
   @Prop()
   birthday: Date;

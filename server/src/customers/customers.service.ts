@@ -17,11 +17,12 @@ export class CustomersService {
         return this.customersRepository.find({});
     }
 
-    async createCustomer(name: string, surname: string, birthday: Date): Promise<Customer> {
+    async createCustomer(name: string, surname: string, country: string, birthday: Date): Promise<Customer> {
         return this.customersRepository.create({
             customerId: uuidv4(),
             name,
             surname,
+            country,
             birthday,
         })
     }

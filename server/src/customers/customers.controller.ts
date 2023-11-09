@@ -23,7 +23,7 @@ export class CustomersController {
   @UseGuards(JwtAuthGuard)
   @Post()
   async createCustomer(@Body() createCustomerDto: CreateCustomerDto): Promise<Customer> {
-      return this.customersService.createCustomer(createCustomerDto.name, createCustomerDto.surname, createCustomerDto.birthday)
+      return this.customersService.createCustomer(createCustomerDto.name, createCustomerDto.surname, createCustomerDto.country, createCustomerDto.birthday)
   }
 
   @UseGuards(JwtAuthGuard)
