@@ -1,7 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './../redux/slices/authSlice';
-
-
 import { combineReducers } from 'redux';
 import {
   persistReducer,
@@ -9,18 +6,9 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-// const store = configureStore({
-//   reducer: {
-//     auth: authReducer,
-//     [authApi.reducerPath]: authApi.reducer,
-//   },
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware().concat(authApi.middleware),
-// })
-
-// export type RootState = ReturnType<typeof store.getState>;
-// export type AppDispatch = typeof store.dispatch;
-
+// slices
+import authReducer from './../redux/slices/authSlice';
+import customersSlice from './slices/customersSlice';
 
 const persistConfig = {
   key: 'root',
@@ -29,7 +17,10 @@ const persistConfig = {
   whitelist: ["auth"],
 }
 
-const reducers = combineReducers({ auth: authReducer });
+const reducers = combineReducers({ 
+  auth: authReducer, 
+  customers: customersSlice 
+});
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 

@@ -1,10 +1,8 @@
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
 import { getUser } from '../redux/slices/authSlice'
-// import Error from '../components/Error'
 
 const LoginScreen = () => {
   const { loading, userInfo, error } = useSelector((state) => state.auth)
@@ -14,44 +12,23 @@ const LoginScreen = () => {
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (userInfo) {
-      navigate('/')
-    }
-  }, [navigate, userInfo])
+  // useEffect(() => {
+  //   if (userInfo) {
+  //     navigate('/')
+  //   }
+  // }, [navigate, userInfo])
 
   const submitForm = (data: { username: string; password: string }) => {
-    // dispatch(userLogin(data))
-    // console.log('data', data)
-    dispatch(getUser(data))
+    try {
+      dispatch(getUser(data))
+      navigate('/')
+    } catch (error) {
+      
+    }
   }
 
   return (
-      // {/* {error && <Error>{error}</Error>} */}
-      // {/* <div className='form-group'>
-      //   <label htmlFor='username'>username</label>
-      //   <input
-      //     type='text'
-      //     className='form-input'
-      //     {...register('username')}
-      //     defaultValue="user"
-      //     required
-      //   />
-      // </div>
-      // <div className='form-group'>
-      //   <label htmlFor='password'>Password</label>
-      //   <input
-      //     type='password'
-      //     className='form-input'
-      //     {...register('password')}
-      //     defaultValue="mosano"
-      //     required
-      //   />
-      // </div>
-      // <button type='submit' className='button' disabled={loading}>
-      //   {loading ? <Spinner /> : 'Login'}
-      // </button> */}
-    <section className="bg-gray-50 dark:bg-gray-900 w-screen">
+    <section>
       <form onSubmit={handleSubmit(submitForm)}>
         <div className="flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
             <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
