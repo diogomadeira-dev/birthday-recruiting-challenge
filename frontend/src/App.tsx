@@ -11,21 +11,22 @@ import LoginScreen from './screens/LoginScreen'
 function App() {
 
   return (
-    <Router>
-    <main className='container content'>
-      <Routes>
-        {/* <Route path='/' element={<HomeScreen />} /> */}
-        <Route path='/login' element={<LoginScreen />} />
-        {/* <Route path='/register' element={<RegisterScreen />} /> */}
-        <Route element={<ProtectedRoute />}>
-          {/* <Route path='/user-profile' element={<ProfileScreen />} /> */}
-          <Route path='/' element={<HomeScreen />} />
-        </Route>
-        <Route path='*' element={<Navigate to='/login' replace />} />
-      </Routes>
-    </main>
-  </Router>
+      <Router>
+      <main className='container content'>
+        <Routes>
+          {/* <Route path='/' element={<HomeScreen />} /> */}
+          <Route path='/login' element={<LoginScreen />} />
+          {/* <Route path='/register' element={<RegisterScreen />} /> */}
+          <Route element={<ProtectedRoute />}>
+            {/* <Route path='/user-profile' element={<ProfileScreen />} /> */}
+            <Route path='/' element={<HomeScreen />} />
+          </Route>
+          <Route path='*' element={<Navigate to='/login' replace />} />
+        </Routes>
+      </main>
+    </Router>
   )
 }
 
-export default App
+export default App;
+

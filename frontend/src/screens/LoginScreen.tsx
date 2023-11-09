@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Spinner from '../components/Spinner'
-import { userLogin } from '../features/auth/authActions'
+import { getUser } from '../redux/slices/authSlice'
 // import Error from '../components/Error'
 
 const LoginScreen = () => {
@@ -20,19 +20,22 @@ const LoginScreen = () => {
 //     }
 //   }, [navigate, userInfo])
 
-  const submitForm = (data) => {
-    dispatch(userLogin(data))
+  const submitForm = (data: { username: string; password: string }) => {
+    // dispatch(userLogin(data))
+    // console.log('data', data)
+    dispatch(getUser(data))
   }
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>
       {/* {error && <Error>{error}</Error>} */}
       <div className='form-group'>
-        <label htmlFor='email'>Email</label>
+        <label htmlFor='username'>username</label>
         <input
-          type='email'
+          type='text'
           className='form-input'
-          {...register('email')}
+          {...register('username')}
+          defaultValue="user"
           required
         />
       </div>
@@ -42,6 +45,7 @@ const LoginScreen = () => {
           type='password'
           className='form-input'
           {...register('password')}
+          defaultValue="mosano"
           required
         />
       </div>
