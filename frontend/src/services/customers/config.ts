@@ -9,12 +9,8 @@ const customersApi = axios.create({
 
 customersApi.interceptors.request.use(
   (config) => {
-    // Assuming you have the accessToken stored in localStorage
     const auth = JSON.parse(localStorage.getItem('persist:root')).auth
-
     const accessToken = JSON.parse(auth).accessToken
-
-    console.log('accessToken', accessToken)
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;

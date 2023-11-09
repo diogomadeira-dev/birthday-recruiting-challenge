@@ -3,10 +3,11 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { CountriesModule } from './countries/countries.module';
 import { CustomersModule } from './customers/customers.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb+srv://mongo:XO4LD0Fd828LcF78@birthday-recruiting-cha.ysl1ddm.mongodb.net/'), CustomersModule, AuthModule],
+  imports: [MongooseModule.forRoot('mongodb+srv://mongo:XO4LD0Fd828LcF78@birthday-recruiting-cha.ysl1ddm.mongodb.net/'), CustomersModule, AuthModule, CountriesModule],
   controllers: [AppController],
   providers: [AppService],
 })

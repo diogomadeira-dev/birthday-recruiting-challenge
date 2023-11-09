@@ -36,11 +36,8 @@ const HomeScreen = () => {
   const navigate = useNavigate()
 
 
-  const { customers, error } = useSelector((state: any) => state.customers)
+  const { customers, error, loading } = useSelector((state: any) => state.customers)
   const { userInfo } = useSelector((state: any) => state.auth)
-
-
-  const loading = false
 
   useEffect(() => {
     dispatch(getCustomers())
@@ -181,6 +178,11 @@ const HomeScreen = () => {
               </table>
               </div>
             </div>
+            {/* <Alert className="mt-10">
+              <AlertDescription>
+              {`Hello $${name} from ${country}. on ${day} of ${month} you will be ${years} old! Also has to show a list with all the entries made.`}
+              </AlertDescription>
+            </Alert> */}
           </div>
         </form>
       </Form>
