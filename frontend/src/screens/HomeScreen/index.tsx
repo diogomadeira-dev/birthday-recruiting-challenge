@@ -62,7 +62,7 @@ const HomeScreen = () => {
   return (
 
     <div className="flex justify-center p-10 flex-col text-center">
-      <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-10">Intive - FDV Exercise</h1>
+      <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-10">Diogo Madeira - Recruiting Challenge Mosano</h1>
       <div className="flex gap-10 w-full">
         <div className="flex justify-center flex-col">
           <Form {...form}>
