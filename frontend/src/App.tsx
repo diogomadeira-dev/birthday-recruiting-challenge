@@ -14,13 +14,8 @@ function App() {
 
       <Router>
         <Routes>
-          {/* <Route path='/' element={<HomeScreen />} /> */}
           <Route path='/login' element={<LoginScreen />} />
-          {/* <Route path='/register' element={<RegisterScreen />} /> */}
-          {/* <Route element={<ProtectedRoute />}> */}
-            {/* <Route path='/user-profile' element={<ProfileScreen />} /> */}
-            <Route path='/' element={<HomeScreen />} />
-          {/* </Route> */}
+          <Route path='/' element={<HomeScreen />} />
           <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>
     </Router>

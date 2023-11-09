@@ -18,11 +18,9 @@ const getCustomers = createAsyncThunk('customers/get', async () => {
   }
 });
 
-const createCustomer = createAsyncThunk('customers/post', async (data, { getState }) => {
+const createCustomer = createAsyncThunk('customers/post', async (data) => {
   try { 
-    const state: any = getState()
-    const accessToken = state.auth.accessToken
-    const response = await customersApi.crateCustomer({data, accessToken});
+    const response = await customersApi.createCustomer(data);
 
     return response;
   } catch (error) {
@@ -40,26 +38,26 @@ const customersSlice = createSlice({
   },
   extraReducers: (builder) => {
     // Get customers
-    builder.addCase(getCustomers.pending, (state, _) => {
+    builder.addCase(getCustomers.pending, (state) => {
       state.loading = true
     });
     builder.addCase(getCustomers.fulfilled, (state, action) => {
       state.loading = false
       state.customers = action.payload.data
     });
-    builder.addCase(getCustomers.rejected, (state, _) => {
+    builder.addCase(getCustomers.rejected, (state) => {
       state.loading = false
     });
     // create customer
-    builder.addCase(createCustomer.pending, (state, _) => {
+    builder.addCase(createCustomer.pending, (state) => {
       state.loading = true
       state.error = false
     });
-    builder.addCase(createCustomer.fulfilled, (state, _) => {
+    builder.addCase(createCustomer.fulfilled, (state) => {
       state.loading = false
       state.error = false
     });
-    builder.addCase(createCustomer.rejected, (state, _) => {
+    builder.addCase(createCustomer.rejected, (state) => {
       state.loading = false
       state.error = true
     });

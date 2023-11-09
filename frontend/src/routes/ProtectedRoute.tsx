@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { Link, Outlet } from 'react-router-dom'
 
 const ProtectedRoute = () => {
-  const { userInfo } = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state: any) => state.auth)
 
   console.log('userInfo', userInfo)
 

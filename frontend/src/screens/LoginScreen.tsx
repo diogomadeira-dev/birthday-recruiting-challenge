@@ -6,18 +6,12 @@ import Spinner from '../components/Spinner'
 import { getUser } from '../redux/slices/authSlice'
 
 const LoginScreen = () => {
-  const { loading, userInfo, error } = useSelector((state) => state.auth)
+  const { loading,  } = useSelector((state: any) => state.auth)
   const dispatch = useDispatch()
 
   const { register, handleSubmit } = useForm()
 
   const navigate = useNavigate()
-
-  // useEffect(() => {
-  //   if (userInfo) {
-  //     navigate('/')
-  //   }
-  // }, [navigate, userInfo])
 
   const submitForm = (data: { username: string; password: string }) => {
     try {

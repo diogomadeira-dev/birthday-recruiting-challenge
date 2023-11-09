@@ -36,7 +36,9 @@ const HomeScreen = () => {
   const navigate = useNavigate()
 
 
-  const { customers, error } = useSelector((state) => state.customers)
+  const { customers, error } = useSelector((state: any) => state.customers)
+  const { userInfo } = useSelector((state: any) => state.auth)
+
 
   const loading = false
 
@@ -49,8 +51,6 @@ const HomeScreen = () => {
   })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log('data', data)
-
     dispatch(createCustomer(data)).then(() => dispatch(getCustomers()))
   }
 
@@ -61,6 +61,8 @@ const HomeScreen = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mb-10">Intive - FDV Exercise</h1>
             <div className="flex gap-10 w-full">
               <div className="flex justify-center flex-col">
+              {userInfo ? (
+                <>
                 <div className="flex-1 justify-center flex-col text-left w-96 mb-6">
                   <FormField
                     control={form.control}
@@ -135,6 +137,13 @@ const HomeScreen = () => {
                   />
                   </div>
                 <button type="submit" disabled={loading} className="flex mb-2 justify-center text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">{loading ? <Spinner /> : 'Save'}</button>
+                </>               
+                ) : (
+                  <>
+                    <FormMessage className="mb-2">You are not authenticated. Authenticate to register new customers.</FormMessage>
+                    <Button onClick={() => navigate("/login")}>Go to Login</Button>
+                  </>
+                )}
                 {error && 
                 (
                   <>
@@ -153,7 +162,7 @@ const HomeScreen = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {customers && customers.map((customer, index) => {
+                  {customers && customers.map((customer: any, index: number) => {
                     return (
                       <tr key={index}>
                         <td className="border border-slate-300 h-10">
