@@ -17,6 +17,8 @@ Para o backend, desenvolvi uma autenticação com users hard-coded. Além disso,
 
 Decidi integrar a autenticação, mesmo que não fosse obrigatória, para adicionar alguns pontos extras ao projeto.
 
+O MONGODB_URI está hard-coded, desta forma podem aceder à bd que está disponível online.
+
 ## Frontend
 
 ### Tecnologias Utilizadas
