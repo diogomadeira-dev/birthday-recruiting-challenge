@@ -7,10 +7,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { cn } from "@/lib/utils"
 import { getCountries } from "@/redux/slices/countriesSlice"
+import { calculateNextAnniversaries } from "@/utils/birthday"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
-import moment from "moment"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { useSelector } from "react-redux"
@@ -63,46 +63,8 @@ const HomeScreen = () => {
     dispatch(createCustomer(data)).then(() => dispatch(getCustomers()))
   }
 
-  const calculateAge = (birthdate) => {
-    const today = moment();
-    const birthDate = moment(birthdate, 'YYYY-MM-DD');
-    const age = today.diff(birthDate, 'years');
-    return age;
-  };
-
-  const calculateNextAnniversaries = (customersBirthday) => {
-    const today = new Date();
-    const currentYear = today.getFullYear();
-
-    const nextAnniversariesData = customersBirthday.map((user) => {
-      const birthdate = new Date(user.birthday);
-      const nextAnniversary = new Date(currentYear, birthdate.getMonth(), birthdate.getDate());
-
-      if (today > nextAnniversary) {
-        nextAnniversary.setFullYear(currentYear + 1);
-      }
-
-      const daysUntilNextAnniversary = Math.floor((nextAnniversary - today) / (24 * 60 * 60 * 1000));
-
-
-      return {
-        ...user,
-        month: moment(birthdate).format('MMMM'),
-        day: moment(birthdate).format('dddd'),
-        yearsOld: calculateAge(birthdate),
-        nextAnniversaryDate: nextAnniversary.toDateString(),
-        daysUntilNextAnniversary: daysUntilNextAnniversary,
-      };
-    });
-
-    const nextAnniversariesDataSorted = nextAnniversariesData.sort((a, b) => a.daysUntilNextAnniversary - b.daysUntilNextAnniversary);
-
-    console.log('nextAnniversariesDataSorted', nextAnniversariesDataSorted)
-    if (nextAnniversariesDataSorted[0]) setNextAnniversary(nextAnniversariesDataSorted[0])
-  };
   useEffect(() => {
-
-    calculateNextAnniversaries(customers);
+    if (calculateNextAnniversaries(customers)) setNextAnniversary(calculateNextAnniversaries(customers))
   }, [customers])
 
   return (
@@ -234,11 +196,12 @@ const HomeScreen = () => {
           <HomeTable customers={customers} />
         </div>
       </div>
-      <Alert className="mt-10">
+      {nextAnniversary && <Alert className="mt-10">
         <AlertDescription>
-          {`Hello ${nextAnniversary.name} from ${nextAnniversary.country}. on ${nextAnniversary.day} of ${nextAnniversary.month} you will be ${nextAnniversary.yearsOld} old!`}
+          {`Hello ${nextAnniversary?.name} from ${nextAnniversary?.country}. on ${nextAnniversary?.day} of ${nextAnniversary?.month} you will be ${nextAnniversary?.yearsOld} years old!`}
         </AlertDescription>
-      </Alert>
+      </Alert>}
+
     </div>
 
   )
