@@ -1,4 +1,4 @@
-# Diogo Madeira - Recruiting Challenge Mosano
+# Diogo Madeira - Recruiting Challenge 
 
 ## Backend
 
